@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — Wheels on Fire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#about-main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="site-title"><a href="../index.html">Wheels on Fire</a></h1>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html" aria-current="page">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="about-main" class="container" role="main">
+    <article class="about-article" aria-labelledby="about-heading">
+      <h2 id="about-heading">Meet John O'Reilly</h2>
+      <figure>
+        <img src="../media/john.jpg" alt="Portrait of John O'Reilly smiling next to a vintage car" />
+        <figcaption>John — part car-lover, part commentator.</figcaption>
+      </figure>
+
+      <p>John’s been tinkering with cars, reading specs, and making slightly sarcastic comments since he was old enough to kick a tyre. He built <strong>Wheels on Fire</strong> to help folks find their perfect ride — and to crack the occasional joke while doing it.</p>
+
+      <h3>What John cares about</h3>
+      <ul>
+        <li><strong>Honesty:</strong> he’ll tell you if a car’s worth the hype.</li>
+        <li><strong>Clarity:</strong> specs shown with icons and text — not just colors.</li>
+        <li><strong>Accessibility:</strong> images with alt text, keyboard support, visible focus states, and good contrast.</li>
+      </ul>
+
+      <h3>Accessibility notes</h3>
+      <p>John specifically asked for the site to be accessible for people who are colour-blind. The site includes:</p>
+      <ol>
+        <li><strong>Icons + text labels</strong> instead of color-only signals (e.g., fuel type uses icons and words).</li>
+        <li><strong>High contrast</strong> (dark text on light backgrounds) and clear focus outlines for keyboard users.</li>
+        <li><strong>Underlines/bold/shape</strong> cues for important items so color alone is not relied upon.</li>
+      </ol>
+
+      <p>If you want John to be brutally honest about your current car, he’s available — gently mocking included.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© <span id="year"></span> Wheels on Fire — John O'Reilly</p>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

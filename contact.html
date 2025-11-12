@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Wheels on Fire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#contact-main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="site-title"><a href="../index.html">Wheels on Fire</a></h1>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contact-main" class="container" role="main">
+    <section class="contact-section" aria-labelledby="contact-heading">
+  <img src="https://images.unsplash.com/photo-1517142089942-ba376ce32a2e?auto=format&fit=crop&w=1000&q=80"
+       alt="Close-up of a steering wheel and dashboard, sunlight through windshield"
+       style="width:100%; border-radius:8px; margin-bottom:1rem;">
+  <h2 id="contact-heading">Contact John</h2>
+
+      <p>If you have a car question, a suggestion, or a spare part he can borrow (kidding), drop John a message below. He promises to answer — probably with a pun.</p>
+
+      <form id="contact-form" class="contact-form" action="#" method="post" novalidate aria-describedby="form-instructions">
+        <p id="form-instructions">All fields are labeled. Error messages appear as text (not color only).</p>
+
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required aria-required="true" />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required aria-required="true" />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required aria-required="true" placeholder="Tell John what you're looking for..."></textarea>
+
+        <!-- Non-color-only error example (hidden initially) -->
+        <div id="error-placeholder" aria-live="polite" class="form-error" hidden>
+          <span class="error-icon" aria-hidden="true">⚠️</span>
+          <span id="error-text">Please complete all required fields.</span>
+        </div>
+
+        <button type="submit" class="btn">Send message</button>
+
+        <div id="form-success" aria-live="polite" class="form-success" hidden>
+          Thanks — John will be in touch. Expect an answer, possibly with sarcasm.
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>© <span id="year"></span> Wheels on Fire — John O'Reilly</p>
+    </div>
+  </footer>
+
+  <script>
+    // small client-side validation to show non-color-only error messages
+    (function () {
+      const form = document.getElementById('contact-form');
+      const errorBox = document.getElementById('error-placeholder');
+      const successBox = document.getElementById('form-success');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorBox.hidden = true;
+        successBox.hidden = true;
+
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+
+        if (!name || !email || !message) {
+          document.getElementById('error-text').textContent = 'Please complete all required fields.';
+          errorBox.hidden = false;
+          errorBox.focus();
+          return;
+        }
+
+        // Simulated successful submission
+        successBox.hidden = false;
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>

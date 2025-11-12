@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wheels on Fire — Find Your Perfect Car</title>
+
+  <!-- Google Font (accessible, sans-serif) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Skip link for keyboard users -->
+  <a class="skip-link" href="#maincontent">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <h1 class="site-title">Wheels on Fire</h1>
+      <p class="site-tagline">John O'Reilly — sarcasm sold separately. Helping you find the perfect car.</p>
+
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="maincontent" class="container" role="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <h2 id="hero-heading">Find the car that sparks joy (and maybe a little petrol envy)</h2>
+        <p>At <strong>Wheels on Fire</strong>, John helps you narrow the field — no nonsense, clear labels, and a few dry jokes to keep things fun.</p>
+
+        <ul class="features-list">
+          <li><strong>Clear filters:</strong> price, style, fuel type, reliability — labeled and keyboard friendly.</li>
+          <li><strong>Color-blind aware:</strong> icons+text, not color-only indicators.</li>
+          <li><strong>Accessible images:</strong> alt text and descriptive captions.</li>
+        </ul>
+
+        <p><a class="cta" href="pages/about.html">Meet John →</a></p>
+      </div>
+
+  <figure class="hero-image" aria-hidden="false">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
+        alt="Three cars parked side by side: a compact city car, a sedan, and an SUV in neutral tones" />
+    <figcaption>Pick your type — city, sedan, or rugged SUV.</figcaption>
+  </figure>
+
+
+    <section class="search-panel" aria-labelledby="search-heading">
+      <h3 id="search-heading">Quick car finder</h3>
+      <form class="finder" action="#" method="get" aria-describedby="finder-desc">
+        <p id="finder-desc" class="sr-only">Use these controls to filter vehicles. Selections are labeled and show text icons.</p>
+
+        <label for="q">Search (make, model)</label>
+        <input id="q" name="q" type="search" placeholder="e.g., Ford Fiesta" />
+
+        <label for="type">Body type</label>
+        <select id="type" name="type" aria-label="Body type">
+          <option value="">Any</option>
+          <option value="city">City car — small</option>
+          <option value="sedan">Sedan — comfortable</option>
+          <option value="suv">SUV — spacious</option>
+        </select>
+
+        <fieldset>
+          <legend>Fuel type (choose one)</legend>
+          <label class="check">
+            <input type="radio" name="fuel" value="petrol" checked /> <span class="icon" aria-hidden="true">⛽</span> Petrol
+          </label>
+          <label class="check">
+            <input type="radio" name="fuel" value="diesel" /> <span class="icon" aria-hidden="true">🛢️</span> Diesel
+          </label>
+          <label class="check">
+            <input type="radio" name="fuel" value="ev" /> <span class="icon" aria-hidden="true">🔌</span> Electric / Hybrid
+          </label>
+        </fieldset>
+
+        <button type="submit" class="btn">Find cars</button>
+      </form>
+    </section>
+
+    <section class="about-sample" aria-labelledby="about-sample-heading">
+      <h3 id="about-sample-heading">Why John?</h3>
+      <p>John’s experience finding cars for friends means you get honest guidance — a wink, a pun, and practical tips. He’s got preferences, but the choices are yours. (Yes, he will make one sarcastic remark about SUVs. He can’t help it.)</p>
+      <p><a href="pages/contact.html">Ask John a question →</a></p>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Wheels on Fire — Created by John O'Reilly. <span class="visually-hidden">This site uses accessible markup and color-blind friendly design.</span></p>
+      <p><a href="pages/contact.html">Contact</a> · <a href="pages/about.html">About</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // small script: set year for copyright
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
