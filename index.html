@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wheels on Fire — Find Your Perfect Car</title>
 
-  <!-- Google Font (accessible, sans-serif) -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <!-- Shared stylesheet -->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
   <a class="skip-link" href="#maincontent">Skip to main content</a>
 
   <header class="site-header" role="banner">
@@ -23,8 +22,8 @@
       <nav class="main-nav" role="navigation" aria-label="Main navigation">
         <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="pages/about.html">About</a></li>
-          <li><a href="pages/contact.html">Contact</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -41,24 +40,26 @@
           <li><strong>Color-blind aware:</strong> icons+text, not color-only indicators.</li>
           <li><strong>Accessible images:</strong> alt text and descriptive captions.</li>
         </ul>
-
-        <p><a class="cta" href="pages/about.html">Meet John →</a></p>
       </div>
 
-  <figure class="hero-image" aria-hidden="false">
-    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
-        alt="Three cars parked side by side: a compact city car, a sedan, and an SUV in neutral tones" />
-    <figcaption>Pick your type — city, sedan, or rugged SUV.</figcaption>
-  </figure>
-
+      <figure class="hero-image" aria-hidden="false">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
+            alt="Three cars parked side by side: a compact city car, a sedan, and an SUV in neutral tones" />
+        <figcaption>Pick your type — city, sedan, or rugged SUV.</figcaption>
+      </figure>
+    </section>
 
     <section class="search-panel" aria-labelledby="search-heading">
       <h3 id="search-heading">Quick car finder</h3>
       <form class="finder" action="#" method="get" aria-describedby="finder-desc">
-        <p id="finder-desc" class="sr-only">Use these controls to filter vehicles. Selections are labeled and show text icons.</p>
+        <p id="finder-desc" class="sr-only">
+          Use these controls to filter vehicles. Selections are labeled and show text icons.
+        </p>
 
-        <label for="q">Search (make, model)</label>
-        <input id="q" name="q" type="search" placeholder="e.g., Ford Fiesta" />
+        <label for="model">Model</label>
+        <select id="model" name="model" aria-label="Car model">
+          <option value="">Any</option>
+        </select>
 
         <label for="type">Body type</label>
         <select id="type" name="type" aria-label="Body type">
@@ -71,13 +72,16 @@
         <fieldset>
           <legend>Fuel type (choose one)</legend>
           <label class="check">
-            <input type="radio" name="fuel" value="petrol" checked /> <span class="icon" aria-hidden="true">⛽</span> Petrol
+            <input type="radio" name="fuel" value="petrol" checked />
+            <span class="icon" aria-hidden="true">⛽</span> Petrol
           </label>
           <label class="check">
-            <input type="radio" name="fuel" value="diesel" /> <span class="icon" aria-hidden="true">🛢️</span> Diesel
+            <input type="radio" name="fuel" value="diesel" />
+            <span class="icon" aria-hidden="true">🛢️</span> Diesel
           </label>
           <label class="check">
-            <input type="radio" name="fuel" value="ev" /> <span class="icon" aria-hidden="true">🔌</span> Electric / Hybrid
+            <input type="radio" name="fuel" value="ev" />
+            <span class="icon" aria-hidden="true">🔌</span> Electric / Hybrid
           </label>
         </fieldset>
 
@@ -85,23 +89,117 @@
       </form>
     </section>
 
+    <section class="results" id="results">
+      <h3>Results</h3>
+      <div id="car-results" class="results-grid"></div>
+    </section>
+
     <section class="about-sample" aria-labelledby="about-sample-heading">
       <h3 id="about-sample-heading">Why John?</h3>
       <p>John’s experience finding cars for friends means you get honest guidance — a wink, a pun, and practical tips. He’s got preferences, but the choices are yours. (Yes, he will make one sarcastic remark about SUVs. He can’t help it.)</p>
-      <p><a href="pages/contact.html">Ask John a question →</a></p>
+      <p><a href="contact.html">Ask John a question →</a></p>
     </section>
   </main>
 
   <footer role="contentinfo" class="site-footer">
     <div class="container">
       <p>© <span id="year"></span> Wheels on Fire — Created by John O'Reilly. <span class="visually-hidden">This site uses accessible markup and color-blind friendly design.</span></p>
-      <p><a href="pages/contact.html">Contact</a> · <a href="pages/about.html">About</a></p>
     </div>
   </footer>
 
   <script>
-    // small script: set year for copyright
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ✅ Car data — all with direct image URLs (no Google redirect links)
+    const cars = [
+      {
+        name: "Ford Fiesta",
+        type: "city",
+        fuel: "petrol",
+        price: 12000,
+        image: "OneDrive - Technological University Dublin\TU850-assignment-1-web-development-\images\fordfiesta.jpg"
+      },
+      {
+        name: "Toyota Corolla",
+        type: "sedan",
+        fuel: "petrol",
+        price: 18000,
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/2020_Toyota_Corolla_Icon_Tech_VVT-i_HEV_CVT_1.8_Front.jpg"
+      },
+      {
+        name: "Hyundai Tucson",
+        type: "suv",
+        fuel: "diesel",
+        price: 25000,
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/2022_Hyundai_Tucson_Ultimate_PHEV_1.6_Front.jpg"
+      },
+      {
+        name: "Tesla Model 3",
+        type: "sedan",
+        fuel: "ev",
+        price: 38000,
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/69/Tesla_Model_3_parked%2C_front_driver_side.jpg"
+      },
+      {
+        name: "Nissan Leaf",
+        type: "city",
+        fuel: "ev",
+        price: 21000,
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6b/2018_Nissan_Leaf_Tekna_Front.jpg"
+      }
+    ];
+
+    // ✅ Populate dropdown dynamically
+    const form = document.querySelector(".finder");
+    const resultsContainer = document.getElementById("car-results");
+    const modelDropdown = document.getElementById("model");
+
+    const uniqueModels = [...new Set(cars.map(c => c.name))];
+    uniqueModels.forEach(model => {
+      const opt = document.createElement("option");
+      opt.value = model;
+      opt.textContent = model;
+      modelDropdown.appendChild(opt);
+    });
+
+    // ✅ Handle form submission and filtering
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const selectedModel = form.model.value;
+      const type = form.type.value;
+      const fuel = form.fuel.value;
+
+      const filtered = cars.filter(car => {
+        const matchesModel = selectedModel ? car.name === selectedModel : true;
+        const matchesType = type ? car.type === type : true;
+        const matchesFuel = fuel ? car.fuel === fuel : true;
+        return matchesModel && matchesType && matchesFuel;
+      });
+
+      displayResults(filtered);
+    });
+
+    // ✅ Display results using <img> and <figure>
+    function displayResults(list) {
+      if (list.length === 0) {
+        resultsContainer.innerHTML = "<p>No cars found. Try different filters.</p>";
+        return;
+      }
+
+      resultsContainer.innerHTML = list.map(car => `
+        <article class="car-card">
+          <figure>
+            <img src="${car.image}" alt="${car.name}" loading="lazy">
+            <figcaption>${car.name}</figcaption>
+          </figure>
+          <h4>${car.name}</h4>
+          <p><strong>Type:</strong> ${car.type}</p>
+          <p><strong>Fuel:</strong> ${car.fuel}</p>
+          <p><strong>Price:</strong> €${car.price.toLocaleString()}</p>
+        </article>
+      `).join("");
+    }
   </script>
 </body>
 </html>

@@ -154,3 +154,52 @@ input:focus, select:focus, textarea:focus{
   .hero-image{width:100%}
   .header-inner{flex-direction:column;align-items:flex-start;gap:0.4rem}
 }
+/* === Car finder results section === */
+.results-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  margin-top: 1rem;
+}
+
+.car-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #fafafa;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.car-card:hover {
+  transform: scale(1.03);
+}
+
+.car-card img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.car-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(11,27,43,0.06);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.car-card img {
+  width: 100%;           /* make image take full card width */
+  height: 180px;         /* set consistent height */
+  object-fit: cover;     /* crop without distortion */
+  border-radius: 8px;
+  display: block;        /* prevents tiny inline icon */
+  margin-bottom: 0.5rem;
+}
