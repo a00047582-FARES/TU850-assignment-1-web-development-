@@ -1,205 +1,235 @@
-/* style.css — shared by all pages */
-/* Accessible-friendly base styles, clear focus, high contrast, no reliance on color alone. */
-
-:root{
-  --bg: #f7f7f8;        /* light neutral background */
-  --text: #0b1b2b;      /* very dark navy for high contrast */
-  --accent: #c0392b;    /* accent used sparingly, not for meaning alone */
-  --muted: #4a5568;
-  --container-width: 1000px;
-  --radius: 10px;
-  --base-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+/* ------------------------------
+   GLOBAL RESET & BASE STYLES
+------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  font-family: var(--base-font);
-  color: var(--text);
-  background: var(--bg);
-  line-height:1.45;
-  margin:0;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  font-size:16px; /* accessible base size */
+html {
+  scroll-behavior: smooth;
 }
 
-.container{
-  max-width: var(--container-width);
-  margin:0 auto;
-  padding:1rem;
+body {
+  font-family: "Inter", sans-serif;
+  background: #f8f9fa;
+  color: #222;
+  line-height: 1.6;
 }
 
-.header-inner{
-  display:flex;
-  gap:1rem;
-  align-items:center;
-  justify-content:space-between;
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 10px;
 }
 
-.site-title{
-  margin:0;
-  font-size:1.4rem;
-  letter-spacing:0.5px;
-}
-
-.site-title a{color:var(--text);text-decoration:none}
-
-.site-tagline{margin:0;font-size:0.9rem;color:var(--muted)}
-
-.main-nav ul{
-  list-style:none;
-  padding:0;
-  margin:0;
-  display:flex;
-  gap:0.75rem;
-}
-.main-nav a{
-  display:inline-block;
-  padding:0.4rem 0.6rem;
-  text-decoration:underline; /* underline so links aren't color-only */
-  font-weight:600;
-  border-radius:6px;
-}
-.main-nav a[aria-current="page"]{
-  outline: 3px solid rgba(0,0,0,0.08);
-  text-decoration:underline;
-}
-
-/* Skip link */
-.skip-link{
+/* Skip Link for Accessibility */
+.skip-link {
   position: absolute;
-  left: -9999px;
+  left: -999px;
   top: auto;
   width: 1px;
   height: 1px;
   overflow: hidden;
 }
-.skip-link:focus{
-  position: static;
-  left: auto;
-  width: auto;
-  height: auto;
-  padding: 0.4rem 0.6rem;
-  background: #fff;
-  border: 2px solid var(--accent);
-  z-index:1000;
+
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
+  z-index: 1000;
+  padding: 10px;
+  background: #000;
+  color: #fff;
 }
 
-/* Hero */
-.hero{
-  display:flex;
-  gap:1.5rem;
-  align-items:center;
-  margin-top:1.2rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fbfbfc 100%);
-  border-radius: var(--radius);
-  padding:1rem;
-  box-shadow: 0 6px 18px rgba(11,27,43,0.06);
-}
-.hero-left{flex:1}
-.hero-image{width:320px;flex-shrink:0;text-align:center}
-.hero-image img{width:100%;height:auto;border-radius:8px}
-.features-list{margin-top:0.5rem}
-
-/* Form and inputs */
-label{display:block;margin-top:0.8rem;font-weight:600}
-input[type="text"], input[type="email"], input[type="search"], select, textarea{
-  width:100%;
-  padding:0.65rem;
-  margin-top:0.25rem;
-  border:1px solid #d1d5db;
-  border-radius:8px;
-  background:#fff;
-  font-size:1rem;
-  color:var(--text);
-}
-input:focus, select:focus, textarea:focus{
-  outline:3px solid rgba(192,57,43,0.18); /* visible focus (not color-only) */
-  outline-offset:2px;
+/* ------------------------------
+   HEADER & NAVIGATION
+------------------------------ */
+.site-header {
+  background: #111;
+  color: #fff;
+  padding: 20px 0;
 }
 
-/* Buttons */
-.btn, .cta{
-  display:inline-block;
-  padding:0.6rem 1rem;
-  background:var(--accent);
-  color:#fff;
-  border-radius:8px;
-  text-decoration:none;
-  border:none;
-  font-weight:700;
-  cursor:pointer;
-}
-.btn:focus, .cta:focus{outline:3px solid rgba(192,57,43,0.28); outline-offset:2px}
-
-/* Radio/checkbox styles */
-.check{display:inline-flex;gap:0.5rem;align-items:center;margin-right:0.75rem}
-.check input{margin-right:0.35rem}
-
-/* Footer */
-.site-footer{margin-top:2rem;padding:1rem 0;border-top:1px solid #e6e9ee;color:var(--muted)}
-
-/* Utility classes */
-.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-.visually-hidden{display:none}
-
-/* Error and success blocks (not color-only) */
-.form-error{margin-top:0.75rem;padding:0.6rem;border-radius:8px;background:#fff3f3;border:1px solid #f1c0bf;color:#611111;display:flex;gap:0.5rem;align-items:center}
-.form-success{margin-top:0.75rem;padding:0.6rem;border-radius:8px;background:#f2fff5;border:1px solid #cfe9d1;color:#0b4d1a;}
-
-/* Responsive */
-@media (max-width:900px){
-  .hero{flex-direction:column}
-  .hero-image{width:100%}
-  .header-inner{flex-direction:column;align-items:flex-start;gap:0.4rem}
-}
-/* === Car finder results section === */
-.results-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  margin-top: 1rem;
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.car-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
-  background: #fafafa;
+.site-header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.site-header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus {
+  text-decoration: underline;
+}
+
+/* ------------------------------
+   HERO SECTION
+------------------------------ */
+.hero {
   text-align: center;
-  transition: transform 0.2s;
+  padding: 60px 20px;
 }
 
-.car-card:hover {
-  transform: scale(1.03);
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
 }
 
-.car-card img {
+.hero p {
+  font-size: 1.15rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* ------------------------------
+   MAIN CONTAINER
+------------------------------ */
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* ------------------------------
+   FORM STYLING (Contact Page)
+------------------------------ */
+form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
   width: 100%;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
-}
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.car-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(11,27,43,0.06);
-  padding: 0.75rem;
-  text-align: center;
-}
-
-.car-card img {
-  width: 100%;           /* make image take full card width */
-  height: 180px;         /* set consistent height */
-  object-fit: cover;     /* crop without distortion */
+  padding: 12px;
+  margin-bottom: 20px;
   border-radius: 8px;
-  display: block;        /* prevents tiny inline icon */
-  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+button,
+input[type="submit"] {
+  background: #0069d9;
+  border: none;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  background: #0053b3;
+}
+
+/* ------------------------------
+   CAR GRID & EVENT GRID
+------------------------------ */
+.grid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin: 10px 0;
+  font-size: 1.3rem;
+}
+
+.event-date {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* ------------------------------
+   ABOUT PAGE
+------------------------------ */
+.about-section {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.about-section p {
+  margin-bottom: 15px;
+}
+
+/* ------------------------------
+   FOOTER
+------------------------------ */
+.site-footer {
+  background: #111;
+  color: #fff;
+  padding: 25px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ------------------------------
+   MOBILE RESPONSIVE FIXES
+------------------------------ */
+
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .site-header nav ul {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  form {
+    padding: 20px;
+  }
 }

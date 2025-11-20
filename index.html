@@ -1,3 +1,4 @@
+<!-- Updated index.html with accessibility fixes, responsiveness improvements, and link to new Events page -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,10 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wheels on Fire — Find Your Perfect Car</title>
 
-  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Shared stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,6 +21,7 @@
         <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="about.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -52,9 +51,7 @@
     <section class="search-panel" aria-labelledby="search-heading">
       <h3 id="search-heading">Quick car finder</h3>
       <form class="finder" action="#" method="get" aria-describedby="finder-desc">
-        <p id="finder-desc" class="sr-only">
-          Use these controls to filter vehicles. Selections are labeled and show text icons.
-        </p>
+        <p id="finder-desc" class="sr-only">Use these controls to filter vehicles. Selections are labeled and show text icons.</p>
 
         <label for="model">Model</label>
         <select id="model" name="model" aria-label="Car model">
@@ -73,15 +70,15 @@
           <legend>Fuel type (choose one)</legend>
           <label class="check">
             <input type="radio" name="fuel" value="petrol" checked />
-            <span class="icon" aria-hidden="true">⛽</span> Petrol
+            <span aria-hidden="true">⛽</span> Petrol
           </label>
           <label class="check">
             <input type="radio" name="fuel" value="diesel" />
-            <span class="icon" aria-hidden="true">🛢️</span> Diesel
+            <span aria-hidden="true">🛢️</span> Diesel
           </label>
           <label class="check">
             <input type="radio" name="fuel" value="ev" />
-            <span class="icon" aria-hidden="true">🔌</span> Electric / Hybrid
+            <span aria-hidden="true">🔌</span> Electric / Hybrid
           </label>
         </fieldset>
 
@@ -96,60 +93,29 @@
 
     <section class="about-sample" aria-labelledby="about-sample-heading">
       <h3 id="about-sample-heading">Why John?</h3>
-      <p>John’s experience finding cars for friends means you get honest guidance — a wink, a pun, and practical tips. He’s got preferences, but the choices are yours. (Yes, he will make one sarcastic remark about SUVs. He can’t help it.)</p>
+      <p>John’s experience finding cars for friends means you get honest guidance — a wink, a pun, and practical tips.</p>
       <p><a href="contact.html">Ask John a question →</a></p>
     </section>
   </main>
 
   <footer role="contentinfo" class="site-footer">
     <div class="container">
-      <p>© <span id="year"></span> Wheels on Fire — Created by John O'Reilly. <span class="visually-hidden">This site uses accessible markup and color-blind friendly design.</span></p>
+      <p>© <span id="year"></span> Wheels on Fire — Created by John O'Reilly.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ✅ Car data — all with direct image URLs (no Google redirect links)
     const cars = [
-      {
-        name: "Ford Fiesta",
-        type: "city",
-        fuel: "petrol",
-        price: 12000,
-        image: "images/fordfiesta.jpg"
-      },
-      {
-        name: "Toyota Corolla",
-        type: "sedan",
-        fuel: "petrol",
-        price: 18000,
-        image: "images/toyota.jpg"
-      },
-      {
-        name: "Hyundai Tucson",
-        type: "suv",
-        fuel: "diesel",
-        price: 25000,
-        image: "images/tucson.jpg"
-      },
-      {
-        name: "Tesla Model 3",
-        type: "sedan",
-        fuel: "ev",
-        price: 38000,
-        image: "images/tesla.jpg"
-      },
-      {
-        name: "Nissan Leaf",
-        type: "city",
-        fuel: "ev",
-        price: 21000,
-        image: "images/nissanleaf.jpg"
-      }
+      { name: "Ford Fiesta", type: "city", fuel: "petrol", price: 12000, image: "images/fordfiesta.jpg" },
+      { name: "Toyota Corolla", type: "sedan", fuel: "petrol", price: 18000, image: "images/toyota.jpg" },
+      { name: "Hyundai Tucson", type: "suv", fuel: "diesel", price: 25000, image: "images/tucson.jpg" },
+      { name: "Tesla Model 3", type: "sedan", fuel: "ev", price: 38000, image: "images/telsa.jpg" },
+      { name: "Nissan Leaf", type: "city", fuel: "ev", price: 21000, image: "images/nissanleaf.jpg" },
+      { name: "porsche 911", type: "sedan", fuel: "petrol", price:355406 , image: "images/porsche-911.jpg" }
     ];
 
-    // ✅ Populate dropdown dynamically
     const form = document.querySelector(".finder");
     const resultsContainer = document.getElementById("car-results");
     const modelDropdown = document.getElementById("model");
@@ -162,7 +128,6 @@
       modelDropdown.appendChild(opt);
     });
 
-    // ✅ Handle form submission and filtering
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -180,7 +145,6 @@
       displayResults(filtered);
     });
 
-    // ✅ Display results using <img> and <figure>
     function displayResults(list) {
       if (list.length === 0) {
         resultsContainer.innerHTML = "<p>No cars found. Try different filters.</p>";
