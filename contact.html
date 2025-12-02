@@ -6,8 +6,9 @@
   <title>Contact — Wheels on Fire</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+
   <style>
-    /* ✅ Optional styling for success/error boxes */
+    /* Success / Error boxes */
     .form-message {
       margin-top: 1rem;
       padding: 1rem;
@@ -25,8 +26,33 @@
       color: #b91c1c;
       border: 1px solid #b91c1c;
     }
+
+    /* Inline error messages */
+    .error-text {
+      font-weight: 600;
+      margin-top: 4px;
+      display: block;
+    }
+    .error-text::before {
+      content: "⚠️ ";
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #777;
+    }
   </style>
 </head>
+
 <body>
   <a class="skip-link" href="#contact-main">Skip to main content</a>
 
@@ -46,61 +72,114 @@
 
   <main id="contact-main" class="container" role="main">
     <section class="contact-section" aria-labelledby="contact-heading">
+
       <img 
         src="images/bmw.jpg"
         alt="Close-up of a steering wheel and dashboard, sunlight through windshield"
         style="width:100%; border-radius:8px; margin-bottom:1rem;"
       >
-      
+
       <h2 id="contact-heading">Contact John</h2>
       <p>
         If you have a car question, a suggestion, or a spare part he can borrow (kidding),
         drop John a message below. He promises to answer — probably with a pun.
       </p>
 
-      <!-- ✅ Formspree form -->
-      <form
-        action="https://formspree.io/f/mblqllej"
-        method="POST"
-      >
-        <label>
-          Your email:
-          <input type="email" name="email">
-        </label>
-        <label>
-          Your message:
-          <textarea name="message"></textarea>
-        </label>
-        <!-- your other form fields go here -->
+      <!-- 🔥 Updated Form with ALL required fields -->
+      <form id="contact-form" action="https://formspree.io/f/mblqllej" method="POST" novalidate>
+
+        <label for="firstName">First Name *</label>
+        <input id="firstName" name="firstName" type="text" required>
+        <span class="error-text" id="err-firstName" aria-live="polite"></span>
+
+        <label for="lastName">Last Name *</label>
+        <input id="lastName" name="lastName" type="text" required>
+        <span class="error-text" id="err-lastName" aria-live="polite"></span>
+
+        <label for="email">Email Address *</label>
+        <input id="email" name="email" type="email" required>
+        <span class="error-text" id="err-email" aria-live="polite"></span>
+
+        <label for="reason">Reason for Inquiry *</label>
+        <select id="reason" name="reason" required>
+          <option value="">-- Select a reason --</option>
+          <option value="general">General</option>
+          <option value="feedback">Feedback</option>
+          <option value="technical">Technical Support</option>
+        </select>
+        <span class="error-text" id="err-reason" aria-live="polite"></span>
+
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <span class="error-text" id="err-message" aria-live="polite"></span>
+
         <button type="submit">Send</button>
       </form>
 
-      <!-- ✅ Success and error message containers -->
-      <div id="success-box" class="form-message form-success">✅ Message sent! Check your inbox.</div>
-      <div id="error-box" class="form-message form-error">❌ Something went wrong. Please try again later.</div>
+      <!-- Success/Error notices -->
+      <div id="success-box" class="form-message form-success">✅ Your message has been sent successfully!</div>
+      <div id="error-box" class="form-message form-error">❌ Something went wrong — please try again.</div>
 
+
+      <!-- 🔥 Validation + Formspree JS -->
       <script>
         const form = document.getElementById("contact-form");
-        const successBox = document.getElementById("success-box");
-        const errorBox = document.getElementById("error-box");
+
+        const fields = {
+          firstName: "Please enter your first name.",
+          lastName: "Please enter your last name.",
+          email: "Please enter a valid email address.",
+          reason: "Please select a reason.",
+          message: "Message cannot be empty."
+        };
+
+        function validate() {
+          let isValid = true;
+
+          for (let field in fields) {
+            const input = document.getElementById(field);
+            const errorBox = document.getElementById("err-" + field);
+            errorBox.textContent = "";
+
+            if (!input.value.trim()) {
+              errorBox.textContent = fields[field];
+              isValid = false;
+              continue;
+            }
+
+            if (field === "email") {
+              const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (!emailPattern.test(input.value.trim())) {
+                errorBox.textContent = fields.email;
+                isValid = false;
+              }
+            }
+          }
+
+          return isValid;
+        }
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-          successBox.style.display = "none";
-          errorBox.style.display = "none";
+
+          document.getElementById("success-box").style.display = "none";
+          document.getElementById("error-box").style.display = "none";
+
+          if (!validate()) return;
 
           const data = new FormData(form);
+
           const response = await fetch(form.action, {
             method: form.method,
             body: data,
-            headers: { 'Accept': 'application/json' }
+            headers: { "Accept": "application/json" }
           });
 
           if (response.ok) {
             form.reset();
-            successBox.style.display = "block";
+            document.getElementById("success-box").style.display = "block";
           } else {
-            errorBox.style.display = "block";
+            document.getElementById("error-box").style.display = "block";
           }
         });
       </script>
@@ -115,8 +194,8 @@
   </footer>
 
   <script>
-    // update footer year automatically
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+
 </body>
 </html>
